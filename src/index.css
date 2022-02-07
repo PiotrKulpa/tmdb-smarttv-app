@@ -1,0 +1,10 @@
+.spottable:focus {
+  background-color: blueviolet;
+}
+.test.spottable:focus {
+  background-color: rgb(24, 219, 105);
+}
+
+.div-transition {
+  transition: 'transform 700ms';
+}
