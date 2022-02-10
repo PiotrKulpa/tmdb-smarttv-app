@@ -3,6 +3,7 @@ import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
 import SpottableComponent from '../views/SpottableComponent';
 import GroupedComponent from '../views/GroupedComponent';
 import Carousel from '../views/Carousel';
+import AutoCarousel from '../views/AutoCarousel';
 
 import {
   HashRouter,
@@ -49,6 +50,7 @@ const App = SpotlightRootDecorator(kind({
 			<SpottableComponent text="Spottable component test 2"/>
 			<GroupedComponent />
 			<Carousel />
+			<AutoCarousel width={960}/>
 		
 			</>
 		);
