@@ -4,11 +4,19 @@ import kind from '@enact/core/kind';
 import {forKey, handle, oneOf} from '@enact/core/handle';
 
 const handleRight = (_, props) => {
-	props.setIndex((prev) => prev - 960);
+	const {setTranslateXIndex, elIndex, width} = props;
+	if(elIndex >= 4 &&  elIndex % 4 === 0) {
+		console.log('przewin');
+		setTranslateXIndex((prev) => -4 * width + prev);
+	}
 }
 
 const handleLeft = (_, props) => {
-	props.setIndex((prev) => prev + 960);
+	const {setTranslateXIndex, elIndex, width} = props;
+	if(elIndex >= 4 &&  ((elIndex -1) % 4 === 0)) {
+		console.log('przewin');
+		setTranslateXIndex((prev) => 4 * width + prev);
+	}
 }
 
 const SpottableSwiperComponent = Spottable(kind({
@@ -16,7 +24,6 @@ const SpottableSwiperComponent = Spottable(kind({
 	handlers: {
 		onKeyDown: (evt, props) => { 
 			const { keyCode } = evt;
-			console.log(keyCode);
 			if(keyCode === 39) {
 				handleRight(evt, props)
 			}
@@ -26,7 +33,7 @@ const SpottableSwiperComponent = Spottable(kind({
 		 }
 	},
 	render: (props) => {
-		const { text, width = '100px' } = props;
+		const { text, width = '100' } = props;
 		return (
 			<div style={{
 				boxSizing: 'border-box',

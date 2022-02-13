@@ -1,37 +1,38 @@
 import React from 'react';
 import Spottable from '@enact/spotlight/Spottable';
 import kind from '@enact/core/kind';
-import {forKey, handle} from '@enact/core/handle';
+import {forKey, handle, oneOf} from '@enact/core/handle';
 
-// TODO: add logic for swiper nawigation
-//   1 2 3 4 5
-// 
-const logForEnterKey = handle(
-  forKey('right'),
-  (evt, props) => {
-		console.log(props);
-		props.setIndex(-100);
-	},
-  forKey('left'),
-  (evt, props) => {
-		console.log(props);
-		props.setIndex(100);
-	}
-);
+const handleRight = (_, props) => {
+	props.setIndex((prev) => prev - 960);
+}
+
+const handleLeft = (_, props) => {
+	props.setIndex((prev) => prev + 960);
+}
 
 const SpottableAutoSwiperComponent = Spottable(kind({
 	name: 'SpottableComponent',
 	handlers: {
-		onKeyDown: (evt, props) => { logForEnterKey(evt, props) }
+		onKeyDown: (evt, props) => { 
+			const { keyCode } = evt;
+			console.log(keyCode);
+			if(keyCode === 39) {
+				handleRight(evt, props)
+			}
+			if(keyCode === 37) {
+				handleLeft(evt, props)
+			}
+		 }
 	},
 	render: (props) => {
-		const { text } = props;
+		const { text, width = '100px' } = props;
 		return (
 			<div style={{
 				boxSizing: 'border-box',
 				border:'1px solid red',
 				height:'100px',
-				width: '100px',
+				width: `${width}px`,
 			}} {...props} >{text}</div>
 		);
 	}

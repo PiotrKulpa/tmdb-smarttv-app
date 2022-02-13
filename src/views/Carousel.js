@@ -7,7 +7,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 const Wrapper = ({children, ...rest}) => {
 
-  const [index, setIndex] = useState(0);
+  const [translateXIndex, setTranslateXIndex] = useState(0);
+  const oryginalData = [1, 2, 3, 4, 5,6,7,8,9];
   
   return (
 	<div
@@ -15,7 +16,7 @@ const Wrapper = ({children, ...rest}) => {
       display:'flex',
     border:'1px solid black',
     height:'200px',
-    width: '200px',
+    width: '100%',
     overflow:'hidden',
     }}
     {...rest}
@@ -23,21 +24,25 @@ const Wrapper = ({children, ...rest}) => {
     <div
       style={{
         display:'flex',
-        transform: `translateX(${index}px)`,
+        transform: `translateX(${translateXIndex}px)`,
         transition: 'transform 700ms',
       }}
     >
-      <SpottableSwiperComponent {...{setIndex}} text="Carousel 1" />
-      <SpottableSwiperComponent text="Carousel 2" />
-      <SpottableSwiperComponent text="Carousel 3" />
-      <SpottableSwiperComponent text="Carousel 4" />
-      <SpottableSwiperComponent text="Carousel 5" />
-      <SpottableSwiperComponent text="Carousel 6" />
+      {oryginalData.map((el, elIndex) => {
+        return (
+          <SpottableSwiperComponent 
+            width={420} 
+            text={el} 
+            elIndex={elIndex + 1} 
+            {...{setTranslateXIndex}}
+          />
+        )
+      })}
     </div>
   </div>
 )};
 
-const GroupedComponentWrapper = SpotlightContainerDecorator( {enterTo: 'default-element'}, Wrapper);
+const GroupedComponentWrapper = SpotlightContainerDecorator( {enterTo: 'last-focused'}, Wrapper);
 
 const Carousel = kind({
   functional: true,
