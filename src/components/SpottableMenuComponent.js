@@ -11,7 +11,7 @@ const logForEnterKey = handle(
 	}
 );
 
-const SpottableComponent = Spottable(kind({
+const SpottableMenuComponent = Spottable(kind({
 	name: 'SpottableComponent',
 	handlers: {
 		onKeyDown: (evt, props) => { logForEnterKey(evt, props) }
@@ -19,9 +19,9 @@ const SpottableComponent = Spottable(kind({
 	render: (props) => {
 		const { text } = props;
 		return (
-			<div {...props} >{text}</div>
+			<span style={{color: 'white', padding: '30px'}} {...props} >{text}</span>
 		);
 	}
 }));
 
-export default SpottableComponent;
+export default SpottableMenuComponent;

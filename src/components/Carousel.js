@@ -14,8 +14,6 @@ const Wrapper = ({children, ...rest}) => {
 	<div
     style={{
       display:'flex',
-    border:'1px solid black',
-    height:'200px',
     width: '100%',
     overflow:'hidden',
     }}
@@ -33,7 +31,8 @@ const Wrapper = ({children, ...rest}) => {
           <SpottableSwiperComponent 
             width={420} 
             text={el} 
-            elIndex={elIndex + 1} 
+            elIndex={elIndex + 1}
+            dataLength={oryginalData.length} 
             {...{setTranslateXIndex}}
           />
         )

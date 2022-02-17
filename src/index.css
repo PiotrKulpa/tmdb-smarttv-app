@@ -1,10 +1,26 @@
-.spottable:focus {
-  background-color: blueviolet;
+body {
+  background-color: #62a7de;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
+.spottable:focus {
+  outline: none;
+}
+
+.menu .spottable:focus {
+  text-decoration: underline;
+  text-decoration-color: #62a7de;
+  text-decoration-thickness: 15px;
+}
+
 .test.spottable:focus {
   background-color: rgb(24, 219, 105);
 }
 
 .div-transition {
-  transition: 'transform 700ms';
+  transition: "transform 700ms";
+}
+
+a {
+  text-decoration: none;
 }

@@ -1,22 +1,30 @@
 import React from 'react';
 import Spottable from '@enact/spotlight/Spottable';
 import kind from '@enact/core/kind';
-import {forKey, handle, oneOf} from '@enact/core/handle';
 
 const handleRight = (_, props) => {
-	props.setIndex((prev) => prev - 960);
+	const {setTranslateXIndex, elIndex, width, dataLength} = props;
+
+	if(elIndex === dataLength) return;
+	if(elIndex >= 4 &&  elIndex % 4 === 0) {
+		console.log(dataLength);
+		setTranslateXIndex((prev) => -4 * width + prev);
+	}
 }
 
 const handleLeft = (_, props) => {
-	props.setIndex((prev) => prev + 960);
+	const {setTranslateXIndex, elIndex, width} = props;
+	if(elIndex >= 4 &&  ((elIndex -1) % 4 === 0)) {
+		console.log('przewin');
+		setTranslateXIndex((prev) => 4 * width + prev);
+	}
 }
 
-const SpottableAutoSwiperComponent = Spottable(kind({
+const SpottableSwiperComponent = Spottable(kind({
 	name: 'SpottableComponent',
 	handlers: {
 		onKeyDown: (evt, props) => { 
 			const { keyCode } = evt;
-			console.log(keyCode);
 			if(keyCode === 39) {
 				handleRight(evt, props)
 			}
@@ -26,16 +34,17 @@ const SpottableAutoSwiperComponent = Spottable(kind({
 		 }
 	},
 	render: (props) => {
-		const { text, width = '100px' } = props;
+		const { text, width = '100' } = props;
 		return (
 			<div style={{
 				boxSizing: 'border-box',
 				border:'1px solid red',
-				height:'100px',
+				height:'200px',
 				width: `${width}px`,
+				margin: '20px 0'
 			}} {...props} >{text}</div>
 		);
 	}
 }));
 
-export default SpottableAutoSwiperComponent;
+export default SpottableSwiperComponent;

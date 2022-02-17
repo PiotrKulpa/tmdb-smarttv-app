@@ -1,7 +1,6 @@
 import {render} from 'react-dom';
-import App from './App';
+import App from './app';
 import './index.css'
-import 'swiper/swiper-bundle.css'
 
 const appElement = (<App />);
 
