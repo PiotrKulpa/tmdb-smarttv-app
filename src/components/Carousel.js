@@ -2,13 +2,11 @@ import React, { Component, useState } from "react";
 import SpotlightContainerDecorator, {spotlightDefaultClass} from '@enact/spotlight/SpotlightContainerDecorator';
 import kind from '@enact/core/kind';
 import SpottableSwiperComponent from './SpottableSwiperComponent';
-import { Swiper, SwiperSlide } from 'swiper/react';
 
 
-const Wrapper = ({children, ...rest}) => {
+const Wrapper = ({children, data, width, height, ...rest}) => {
 
   const [translateXIndex, setTranslateXIndex] = useState(0);
-  const oryginalData = [1, 2, 3, 4, 5,6,7,8,9];
   
   return (
 	<div
@@ -26,14 +24,16 @@ const Wrapper = ({children, ...rest}) => {
         transition: 'transform 700ms',
       }}
     >
-      {oryginalData.map((el, elIndex) => {
+      {data && data.map(({title = '', backdrop_path = ''}, elIndex) => {
         return (
           <SpottableSwiperComponent 
-            width={420} 
-            text={el} 
+            width={width} 
+            height={height}
+            text={title} 
             elIndex={elIndex + 1}
-            dataLength={oryginalData.length} 
+            dataLength={data.length} 
             {...{setTranslateXIndex}}
+            backImg={backdrop_path}
           />
         )
       })}
@@ -45,8 +45,8 @@ const GroupedComponentWrapper = SpotlightContainerDecorator( {enterTo: 'last-foc
 
 const Carousel = kind({
   functional: true,
-	render: () => (
-    <GroupedComponentWrapper />
+	render: ({data, width, height}) => (
+    <GroupedComponentWrapper {...{data, width, height}}/>
   )
 });
 

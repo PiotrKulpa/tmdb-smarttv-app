@@ -34,14 +34,17 @@ const SpottableSwiperComponent = Spottable(kind({
 		 }
 	},
 	render: (props) => {
-		const { text, width = '100' } = props;
+		const { text, width = '100', height = '100', backImg = '' } = props;
 		return (
 			<div style={{
 				boxSizing: 'border-box',
 				border:'1px solid red',
-				height:'200px',
+				height: `${height}px`,
 				width: `${width}px`,
-				margin: '20px 0'
+				margin: '20px 0',
+				backgroundImage: `url(https://image.tmdb.org/t/p/w500${backImg})`,
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: 'cover'
 			}} {...props} >{text}</div>
 		);
 	}

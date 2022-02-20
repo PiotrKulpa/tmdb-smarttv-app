@@ -17,8 +17,6 @@ const SpottableComponent = Spottable(kind({
 	},
 	render: (props) => {
 		const { text } = props;
-
-		console.log(props);
 		return (
 			<div style={{height: '950px', border: 'solid 1px black'}} {...props} >{text}</div>
 		);

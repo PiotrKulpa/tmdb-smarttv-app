@@ -1,18 +1,17 @@
 import React, { Component, useState, useRef, useEffect } from "react";
 import SpotlightContainerDecorator, {spotlightDefaultClass} from '@enact/spotlight/SpotlightContainerDecorator';
 import kind from '@enact/core/kind';
+
 import SpottableAutoSwiperComponent from './SpottableAutoSwiperComponent';
-import { Swiper, SwiperSlide } from 'swiper/react';
 
 
-const Wrapper = ({children, width, windowHeight, ...rest}) => {
+const Wrapper = ({children, width, windowHeight = '900', data, ...rest}) => {
   const refContainer = useRef(null);
   const [containerWidth, setContainerWidth] = useState(1920);
   const [translateXIndex, setTranslateXIndex] = useState(0);
-  console.log('wysokosc okna', windowHeight);
-  const oryginalData = [1, 2, 3, 4, 5];
-  const data = [oryginalData[oryginalData.length -1],...oryginalData.slice(0,2)]
   console.log(data);
+  const oryginalData = [1, 2, 3, 4, 5];
+  // const data = [oryginalData[oryginalData.length -1],...oryginalData.slice(0,2)]
   useEffect(() => {
     setContainerWidth(refContainer.current.offsetWidth);
     setTranslateXIndex(-refContainer.current.offsetWidth/4)
@@ -35,16 +34,17 @@ const Wrapper = ({children, width, windowHeight, ...rest}) => {
         transition: 'transform 700ms',
       }}
     >
-      {data.map((el, elIndex) => {
+      {data && data.map(({title = '', backdrop_path = '' }, elIndex) => {
         return (
           <SpottableAutoSwiperComponent 
             className={elIndex === 1 ? spotlightDefaultClass : ''} 
-            text={el} 
+            text={title} 
             {...{setTranslateXIndex}} 
             width={containerWidth/2}
             dataLength={data.length}
             elIndex={elIndex + 1}
             height={windowHeight/2}
+            backImg={backdrop_path}
           />
         )
       })}
@@ -56,10 +56,10 @@ const GroupedComponentWrapper = SpotlightContainerDecorator( {enterTo: 'last-foc
 
 const AutoCarousel = kind({
   functional: true,
-	render: ({width, windowHeight}) => {
+	render: ({width, windowHeight, data}) => {
 
     return (
-    <GroupedComponentWrapper {...{width, windowHeight}}/>
+    <GroupedComponentWrapper {...{width, windowHeight, data}}/>
   )}
 });
 

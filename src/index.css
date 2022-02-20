@@ -4,7 +4,7 @@ body {
 }
 
 .spottable:focus {
-  outline: none;
+  /* outline: none; */
 }
 
 .menu .spottable:focus {

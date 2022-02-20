@@ -32,7 +32,7 @@ const SpottableAutoSwiperComponent = Spottable(kind({
 		 }
 	},
 	render: (props) => {
-		const { text, width = '100', height = 200 } = props;
+		const { text, width = '100', height = 200, backImg = '' } = props;
 		return (
 			<div style={{
 				boxSizing: 'border-box',
@@ -40,6 +40,9 @@ const SpottableAutoSwiperComponent = Spottable(kind({
 				height:`${height}px`,
 				width: `${width}px`,
 				margin: '20px 0',
+				backgroundImage: `url(https://image.tmdb.org/t/p/original${backImg})`,
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: 'cover'
 			}} {...props} >{text}</div>
 		);
 	}
